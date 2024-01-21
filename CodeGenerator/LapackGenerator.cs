@@ -105,7 +105,7 @@ namespace CodeGenerator
                     writer.WriteLine("        /// </remarks>");
                 }
 
-                writer.WriteLine("        [DllImport(LibraryName, EntryPoint = \"" + function.Name + "\", CallingConvention = CallingConvention.Cdecl)]");
+                writer.WriteLine("        [DllImport(OpenBlas.LibraryName, EntryPoint = \"" + function.Name + "\", CallingConvention = CallingConvention.Cdecl)]");
                 writer.WriteLine("        public static extern unsafe LapackInfo " + csFuncName + "(");
                 writer.Write("            " + GetNetType(function.Arguments[0]));
                 foreach (var arg in function.Arguments.Skip(1))
