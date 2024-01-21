@@ -10,6 +10,8 @@ namespace CodeGenerator
         private static readonly Regex regParamName = new Regex(@"param\[.+\]\s+([A-Z1-9_]+)\s+");
         private static readonly Regex regParamType = new Regex(@"param\[(.+)\]\s+[A-Z1-9_]+\s+");
 
+        private static readonly FunctionDescription empty = new FunctionDescription();
+
         private string[] purpose;
         private Param[] paramList;
         private string[] remarks;
@@ -146,14 +148,16 @@ namespace CodeGenerator
                 }
             }
 
-            if (purpose.Count == 0)
-            {
-                throw new Exception("Failed to get the purpose!");
-            }
-
             this.purpose = purpose.ToArray();
             this.paramList = paramList.ToArray();
             this.remarks = remarks.ToArray();
+        }
+
+        private FunctionDescription()
+        {
+            this.purpose = Array.Empty<string>();
+            this.paramList = Array.Empty<Param>();
+            this.remarks = Array.Empty<string>();
         }
 
         public Param? GetParam(string name)
@@ -229,6 +233,8 @@ namespace CodeGenerator
         public IReadOnlyList<string> Purpose => purpose;
         public IReadOnlyList<Param> ParamList => paramList;
         public IReadOnlyList<string> Remarks => remarks;
+
+        public static FunctionDescription Empty => empty;
 
 
 

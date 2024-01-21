@@ -20,18 +20,19 @@ namespace CodeGenerator
             foreach (var function in functions)
             {
                 var srcPath = Path.Combine(lapackNetlibSrcDirectory, function.Name.Substring(8) + ".c");
+                var description = FunctionDescription.Empty;
 
-                FunctionDescription description;
                 try
                 {
                     description = new FunctionDescription(srcPath);
-                    ProcessLapackFunction(function, description, dstDir.FullName);
                     Console.WriteLine(function.Name + " ... OK");
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine(function.Name + " ... " + e.Message);
                 }
+
+                ProcessLapackFunction(function, description, dstDir.FullName);
             }
         }
 
@@ -50,18 +51,31 @@ namespace CodeGenerator
                 writer.WriteLine("    {");
 
                 writer.WriteLine("        /// <summary>");
-                foreach (var line in description.Purpose)
+                if (description.Purpose.Count > 0)
                 {
-                    writer.WriteLine("        /// " + WebUtility.HtmlEncode(line));
+                    foreach (var line in description.Purpose)
+                    {
+                        writer.WriteLine("        /// " + WebUtility.HtmlEncode(line));
+                    }
+                }
+                else
+                {
+                    writer.WriteLine("        /// No description available.");
                 }
                 writer.WriteLine("        /// </summary>");
+
                 foreach (var arg in function.Arguments)
                 {
                     writer.WriteLine("        /// <param name=\"" + ToCamelCase(arg.Name) + "\">");
                     var doc = description.GetParam(arg.Name);
                     if (doc != null)
                     {
-                        writer.WriteLine("        /// " + GetInOut(doc.Type) + " " + WebUtility.HtmlEncode(doc.Description[0]) + ".");
+                        var first = WebUtility.HtmlEncode(doc.Description[0]);
+                        if (first.Last() != '.')
+                        {
+                            first += ".";
+                        }
+                        writer.WriteLine("        /// " + GetInOut(doc.Type) + " " + first);
                         foreach (var line in doc.Description.Skip(1))
                         {
                             writer.WriteLine("        /// " + WebUtility.HtmlEncode(line));
@@ -80,6 +94,7 @@ namespace CodeGenerator
                     }
                     writer.WriteLine("        /// </param>");
                 }
+
                 if (description.Remarks.Count > 0)
                 {
                     writer.WriteLine("        /// <remarks>");
