@@ -12,6 +12,7 @@ namespace CodeGenerator
 
         private string[] purpose;
         private Param[] paramList;
+        private string[] remarks;
 
         public FunctionDescription(string path)
         {
@@ -24,6 +25,8 @@ namespace CodeGenerator
             string? paramType = null;
             var paramDescription = new List<string>();
             var paramList = new List<Param>();
+
+            var remarks = new List<string>();
 
             foreach (var line in File.ReadLines(path))
             {
@@ -113,6 +116,29 @@ namespace CodeGenerator
                         }
 
                         break;
+
+                    case ReadState.FurtherDetails:
+                        if (count == 0 && line == @"/* > \verbatim */")
+                        {
+                            count = 1;
+                        }
+                        else if (count == 1 && line == @"/* > */")
+                        {
+                            count = 2;
+                        }
+                        else if (count == 2)
+                        {
+                            if (line == @"/* > \endverbatim */")
+                            {
+                                state = ReadState.None;
+                            }
+                            else
+                            {
+                                remarks.Add(Trim(line));
+                            }
+                        }
+
+                        break;
                 }
             }
 
@@ -123,6 +149,7 @@ namespace CodeGenerator
 
             this.purpose = purpose.ToArray();
             this.paramList = paramList.ToArray();
+            this.remarks = remarks.ToArray();
         }
 
         public Param? GetParam(string name)
@@ -192,6 +219,7 @@ namespace CodeGenerator
 
         public IReadOnlyList<string> Purpose => purpose;
         public IReadOnlyList<Param> ParamList => paramList;
+        public IReadOnlyList<string> Remarks => remarks;
 
 
 
