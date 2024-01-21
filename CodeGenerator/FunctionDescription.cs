@@ -126,6 +126,10 @@ namespace CodeGenerator
                         {
                             count = 2;
                         }
+                        else if (count == 1 && line == @"/* > \endverbatim */")
+                        {
+                            state = ReadState.None;
+                        }
                         else if (count == 2)
                         {
                             if (line == @"/* > \endverbatim */")
@@ -169,6 +173,11 @@ namespace CodeGenerator
 
         private static string Trim(string line)
         {
+            if (line == "")
+            {
+                return "";
+            }
+
             if (line == "/* > */")
             {
                 return "";

@@ -5,6 +5,7 @@
 
 # OpenBLAS related
 OpenBLAS/
+lapack/
 
 # User-specific files
 *.rsuser

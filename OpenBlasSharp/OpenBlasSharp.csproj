@@ -6,8 +6,4 @@
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="lapack\" />
-  </ItemGroup>
-
 </Project>
