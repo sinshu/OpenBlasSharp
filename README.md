@@ -6,7 +6,7 @@ The purpose of this project is to provide a .NET wrapper for [OpenBLAS](https://
 
 ## Installation
 
-The NuGet package is available.
+[The NuGet package](https://www.nuget.org/packages/OpenBlasSharp) is available.
 This package does not contain the native DLL.
 You must [download the compiled binary](https://github.com/OpenMathLib/OpenBLAS/releases) and put `libopenblas.dll` at the directory of the executable file.
 
