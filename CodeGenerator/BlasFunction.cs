@@ -41,7 +41,7 @@ namespace CodeGenerator
                     type += "*";
                     name = name.Substring(1);
                 }
-                return new Argument(type, name);
+                return new Argument(type, name.ToLower());
             }).ToArray();
             var returnType = regReturnType.Match(data).Value;
 
