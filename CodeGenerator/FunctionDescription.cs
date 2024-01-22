@@ -7,8 +7,8 @@ namespace CodeGenerator
 {
     public class FunctionDescription
     {
-        private static readonly Regex regParamName = new Regex(@"param\[.+\]\s+([A-Z1-9_]+)\s+");
-        private static readonly Regex regParamType = new Regex(@"param\[(.+)\]\s+[A-Z1-9_]+\s+");
+        private static readonly Regex regParamName = new Regex(@"param\[.+\]\s+([A-Z1-9_]+)\s*");
+        private static readonly Regex regParamType = new Regex(@"param\[(.+)\]\s+[A-Z1-9_]+\s*");
 
         private static readonly FunctionDescription empty = new FunctionDescription();
 
@@ -30,19 +30,29 @@ namespace CodeGenerator
 
             var remarks = new List<string>();
 
-            foreach (var line in File.ReadLines(path))
+            foreach (var rawLine in File.ReadLines(path))
             {
-                if (line == @"/* > \par Purpose: */")
+                string line;
+                if (rawLine.Length <= 3)
+                {
+                    line = "";
+                }
+                else
+                {
+                    line = rawLine.Substring(3);
+                }
+
+                if (line.Contains("Purpose:"))
                 {
                     state = ReadState.Purpose;
                     count = 0;
                 }
-                else if (line == @"/*  Arguments: */")
+                else if (line.Contains("Arguments:"))
                 {
                     state = ReadState.Arguments;
                     count = 0;
                 }
-                else if (line == @"/* > \par Further Details: */")
+                else if (line.Contains("Further Details:"))
                 {
                     state = ReadState.FurtherDetails;
                     count = 0;
@@ -51,30 +61,30 @@ namespace CodeGenerator
                 switch (state)
                 {
                     case ReadState.Purpose:
-                        if (count == 0 && line == @"/* > \verbatim */")
+                        if (count == 0 && line.Contains(@"\verbatim"))
                         {
                             count = 1;
                         }
-                        else if (count == 1 && line == @"/* > */")
+                        else if (count == 1 && line.Trim() == "")
                         {
                             count = 2;
                         }
                         else if (count == 2)
                         {
-                            if (line == @"/* > \endverbatim */")
+                            if (line.Contains(@"\endverbatim"))
                             {
                                 state = ReadState.None;
                             }
                             else
                             {
-                                purpose.Add(Trim(line));
+                                purpose.Add(line);
                             }
                         }
 
                         break;
 
                     case ReadState.Arguments:
-                        if (count == 0 && line.StartsWith(@"/* > \param["))
+                        if (count == 0 && line.Contains(@"\param["))
                         {
                             paramName = regParamName.Match(line).Groups[1].Value;
                             if (paramName == "")
@@ -88,13 +98,13 @@ namespace CodeGenerator
                             }
                             count = 1;
                         }
-                        else if (count == 1 && line == @"/* > \verbatim */")
+                        else if (count == 1 && line.Contains(@"\verbatim"))
                         {
                             count = 2;
                         }
                         else if (count == 2)
                         {
-                            if (line == @"/* > \endverbatim */")
+                            if (line.Contains(@"\endverbatim"))
                             {
                                 ParamType type;
                                 switch (paramType!)
@@ -113,34 +123,34 @@ namespace CodeGenerator
                             }
                             else
                             {
-                                paramDescription.Add(TrimParam(line));
+                                paramDescription.Add(line.Trim());
                             }
                         }
 
                         break;
 
                     case ReadState.FurtherDetails:
-                        if (count == 0 && line == @"/* > \verbatim */")
+                        if (count == 0 && line.Contains(@"\verbatim"))
                         {
                             count = 1;
                         }
-                        else if (count == 1 && line == @"/* > */")
+                        else if (count == 1 && line.Trim() == "")
                         {
                             count = 2;
                         }
-                        else if (count == 1 && line == @"/* > \endverbatim */")
+                        else if (count == 1 && line.Contains(@"\endverbatim"))
                         {
                             state = ReadState.None;
                         }
                         else if (count == 2)
                         {
-                            if (line == @"/* > \endverbatim */")
+                            if (line.Contains(@"\endverbatim"))
                             {
                                 state = ReadState.None;
                             }
                             else
                             {
-                                remarks.Add(Trim(line));
+                                remarks.Add(line);
                             }
                         }
 
@@ -173,61 +183,6 @@ namespace CodeGenerator
             }
 
             return null;
-        }
-
-        private static string Trim(string line)
-        {
-            if (line == "")
-            {
-                return "";
-            }
-
-            if (line == "/* > */")
-            {
-                return "";
-            }
-
-            if (line == " */")
-            {
-                return "";
-            }
-
-            if (line.StartsWith("/* > ") && line.EndsWith(" */"))
-            {
-                return line.Substring(5, line.Length - 8);
-            }
-
-            if (line.StartsWith("/* ") && line.EndsWith(" */"))
-            {
-                return line.Substring(3, line.Length - 6);
-            }
-
-            if (line.StartsWith("/* > "))
-            {
-                return line.Substring(5, line.Length - 5);
-            }
-
-            throw new Exception("Failed to trim the line!");
-        }
-
-        private static string TrimParam(string line)
-        {
-            if (line == "")
-            {
-                return "";
-            }
-
-            if (line == "/* > */")
-            {
-                return "";
-            }
-
-            if (line.StartsWith("/* > ") && line.EndsWith(" */"))
-            {
-                return line.Substring(5, line.Length - 8).Trim();
-            }
-
-            throw new Exception("Failed to trim the param line!");
         }
 
         public IReadOnlyList<string> Purpose => purpose;

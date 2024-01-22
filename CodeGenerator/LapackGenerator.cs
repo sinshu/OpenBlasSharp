@@ -19,7 +19,7 @@ namespace CodeGenerator
 
             foreach (var function in functions)
             {
-                var srcPath = Path.Combine(lapackNetlibSrcDirectory, function.Name.Substring(8) + ".c");
+                var srcPath = Path.Combine(lapackNetlibSrcDirectory, function.Name.Substring(8) + ".f");
                 var description = FunctionDescription.Empty;
 
                 try
@@ -94,6 +94,17 @@ namespace CodeGenerator
                         }
                     }
                     writer.WriteLine("        /// </param>");
+                }
+
+                if (description.GetParam("info") != null)
+                {
+                    var doc = description.GetParam("info")!;
+                    writer.WriteLine("        /// <returns>");
+                    foreach (var line in doc.Description.Skip(1))
+                    {
+                        writer.WriteLine("        /// " + WebUtility.HtmlEncode(line));
+                    }
+                    writer.WriteLine("        /// </returns>");
                 }
 
                 if (description.Remarks.Count > 0)

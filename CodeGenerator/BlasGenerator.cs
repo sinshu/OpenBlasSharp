@@ -9,6 +9,7 @@ namespace CodeGenerator
     public static class BlasGenerator
     {
         private static readonly string cblasHeaderFile = @"..\..\..\..\OpenBLAS\cblas.h";
+        private static readonly string blasNetlibSrcDirectory = @"..\..\..\..\OpenBLAS\blas-netlib-src";
 
         public static void Run()
         {
@@ -18,11 +19,24 @@ namespace CodeGenerator
 
             foreach (var function in functions)
             {
-                ProcessLapackFunction(function, dstDir.FullName);
+                var srcPath = Path.Combine(blasNetlibSrcDirectory, function.Name.Substring(6) + ".f");
+                var description = FunctionDescription.Empty;
+
+                try
+                {
+                    description = new FunctionDescription(srcPath);
+                    Console.WriteLine(function.Name + " ... OK");
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(function.Name + " ... " + e.Message);
+                }
+
+                ProcessLapackFunction(function, description, dstDir.FullName);
             }
         }
 
-        private static void ProcessLapackFunction(BlasFunction function, string dstDir)
+        private static void ProcessLapackFunction(BlasFunction function, FunctionDescription description, string dstDir)
         {
             var csFuncName = ToPascalCase(function.Name.Substring(6));
             var dstFile = Path.Combine(dstDir, csFuncName + ".cs");
@@ -38,6 +52,40 @@ namespace CodeGenerator
                 writer.WriteLine("{");
                 writer.WriteLine("    public static partial class Blas");
                 writer.WriteLine("    {");
+
+                foreach (var arg in function.Arguments)
+                {
+                    writer.WriteLine("        /// <summary>");
+                    if (description.Purpose.Count > 0)
+                    {
+                        foreach (var line in description.Purpose)
+                        {
+                            writer.WriteLine("        /// " + WebUtility.HtmlEncode(line));
+                        }
+                    }
+                    else
+                    {
+                        writer.WriteLine("        /// No description available.");
+                    }
+                    writer.WriteLine("        /// </summary>");
+
+                    writer.WriteLine("        /// <param name=\"" + ToCamelCase(arg.Name) + "\">");
+                    var doc = description.GetParam(arg.Name);
+                    if (doc != null)
+                    {
+                        var first = WebUtility.HtmlEncode(doc.Description[0]);
+                        if (first.Last() != '.')
+                        {
+                            first += ".";
+                        }
+                        writer.WriteLine("        /// " + GetInOut(doc.Type) + " " + first);
+                        foreach (var line in doc.Description.Skip(1))
+                        {
+                            writer.WriteLine("        /// " + WebUtility.HtmlEncode(line));
+                        }
+                    }
+                    writer.WriteLine("        /// </param>");
+                }
 
                 writer.WriteLine("        [DllImport(OpenBlas.LibraryName, EntryPoint = \"" + function.Name + "\", CallingConvention = CallingConvention.Cdecl)]");
                 writer.WriteLine("        public static extern unsafe " + GetNetType(function.ReturnType) + " " + csFuncName + "(");
@@ -81,6 +129,21 @@ namespace CodeGenerator
                 sb.Append(tail);
             }
             return sb.ToString();
+        }
+
+        private static string GetInOut(FunctionDescription.ParamType type)
+        {
+            switch (type)
+            {
+                case FunctionDescription.ParamType.In:
+                    return "[in]";
+                case FunctionDescription.ParamType.Out:
+                    return "[out]";
+                case FunctionDescription.ParamType.InOut:
+                    return "[in,out]";
+                default:
+                    throw new Exception();
+            }
         }
 
         private static string GetNetType(string arg)

@@ -45,7 +45,7 @@ namespace CodeGenerator
             }).ToArray();
             var returnType = regReturnType.Match(data).Value;
 
-            this.name = functionName;
+            this.name = functionName.Trim();
             this.arguments = arguments;
             this.returnType = returnType;
         }
