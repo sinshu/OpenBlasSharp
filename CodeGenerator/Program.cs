@@ -10,7 +10,8 @@ namespace CodeGenerator
     {
         public static void Main(string[] args)
         {
-            LapackGenerator.Run();
+            BlasGenerator.Run();
+            //LapackGenerator.Run();
         }
     }
 }
