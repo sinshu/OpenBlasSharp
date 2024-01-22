@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 namespace OpenBlasSharp
 {
     /// <summary>
-    /// Provides OpenBLAS functions.
+    /// Provides OpenBLAS specific functions.
     /// </summary>
     public static partial class OpenBlas
     {
