@@ -8,6 +8,13 @@
     <Version>0.1.0</Version>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <Description>An OpenBLAS wrapper for .NET</Description>
+    <PackageProjectUrl>https://github.com/sinshu/OpenBlasSharp</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/sinshu/OpenBlasSharp</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>openblas;blas;lapack;numerics;math</PackageTags>
+    <PackageReleaseNotes>https://github.com/sinshu/OpenBlasSharp/blob/main/CHANGELOG.md</PackageReleaseNotes>
+    <PackageLicenseExpression>BSD-3-Clause</PackageLicenseExpression>
   </PropertyGroup>
 
 </Project>
