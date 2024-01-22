@@ -7,7 +7,7 @@ The purpose of this project is to provide a .NET wrapper for [OpenBLAS](https://
 ## Installation
 
 [The NuGet package](https://www.nuget.org/packages/OpenBlasSharp) is available.
-This package does not contain the native DLL.
+This package does not include the native DLL.
 You must [download the compiled binary](https://github.com/OpenMathLib/OpenBLAS/releases) and put `libopenblas.dll` at the directory of the executable file.
 
 All the classes are in the `OpenBlasSharp` namespace.
@@ -23,17 +23,17 @@ using OpenBlasSharp;
 ### Dot product
 
 ```cs
-var length = 3;
+var len = 3;
 
 var rnd = new Random(42);
 
-var x = Enumerable.Range(0, length).Select(i => rnd.NextDouble()).ToArray();
-var y = Enumerable.Range(0, length).Select(i => rnd.NextDouble()).ToArray();
+var x = Enumerable.Range(0, len).Select(i => rnd.NextDouble()).ToArray();
+var y = Enumerable.Range(0, len).Select(i => rnd.NextDouble()).ToArray();
 
 fixed (double* px = x)
 fixed (double* py = y)
 {
-    var result = Blas.Ddot(length, px, 1, py, 1);
+    var result = Blas.Ddot(len, px, 1, py, 1);
 }
 ```
 
@@ -103,8 +103,6 @@ fixed (double* pwork = work)
 
 ```cs
 var numThreads = OpenBlas.GetNumThreads();
-
-Console.WriteLine(numThreads);
 ```
 
 
