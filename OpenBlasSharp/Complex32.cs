@@ -8,15 +8,8 @@ namespace OpenBlasSharp
     /// </summary>
     public struct Complex32
     {
-        /// <summary>
-        /// The real part of the complex number.
-        /// </summary>
-        public float Real;
-
-        /// <summary>
-        /// The imaginary part of the complex number.
-        /// </summary>
-        public float Imaginary;
+        private float real;
+        private float imaginary;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Complex32"/> structure using the specified real and imaginary values.
@@ -25,8 +18,18 @@ namespace OpenBlasSharp
         /// <param name="imaginary">The imaginary part of the complex number.</param>
         public Complex32(float real, float imaginary)
         {
-            this.Real = real;
-            this.Imaginary = imaginary;
+            this.real = real;
+            this.imaginary = imaginary;
         }
+
+        /// <summary>
+        /// Gets the real component of the current <see cref="Complex32"/> object.
+        /// </summary>
+        public float Real => real;
+
+        /// <summary>
+        /// Gets the imaginary component of the current <see cref="Complex32"/> object.
+        /// </summary>
+        public float Imaginary => imaginary;
     }
 }
