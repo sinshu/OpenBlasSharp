@@ -109,7 +109,6 @@ var numThreads = OpenBlas.GetNumThreads();
 
 ## Development status
 
-* Doc comments for the BLAS functions are missing.
 * Low-level LAPACK functions with the `_work` suffix are not supported.
 * LAPACK functions that require function pointers are not supported.
 
