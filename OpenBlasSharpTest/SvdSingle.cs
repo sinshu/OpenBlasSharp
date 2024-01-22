@@ -24,7 +24,7 @@ namespace OpenBlasSharpTest
             var vt = new float[n * n];
             var work = new float[Math.Min(m, n) - 1];
 
-            var am = CreateMatrix(a, m, n);
+            var ma = CreateMatrix(a, m, n);
 
             fixed (float* pa = a)
             fixed (float* ps = s)
@@ -43,16 +43,16 @@ namespace OpenBlasSharpTest
                     pwork);
             }
 
-            var sm = CreateDiagonalMatrix(s, m, n);
-            var um = CreateMatrix(u, m, m);
-            var vtm = CreateMatrix(vt, n, n);
-            var reconstructed = um * sm * vtm;
+            var ms = CreateDiagonalMatrix(s, m, n);
+            var mu = CreateMatrix(u, m, m);
+            var mvt = CreateMatrix(vt, n, n);
+            var reconstructed = mu * ms * mvt;
 
             for (var col = 0; col < n; col++)
             {
                 for (var row = 0; row < m; row++)
                 {
-                    var error = am[row, col] - reconstructed[row, col];
+                    var error = ma[row, col] - reconstructed[row, col];
                     Assert.That(Math.Abs(error) < 1.0E-6);
                 }
             }
