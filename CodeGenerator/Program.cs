@@ -11,7 +11,7 @@ namespace CodeGenerator
         public static void Main(string[] args)
         {
             BlasGenerator.Run();
-            //LapackGenerator.Run();
+            LapackGenerator.Run();
         }
     }
 }

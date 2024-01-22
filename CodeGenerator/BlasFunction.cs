@@ -21,6 +21,9 @@ namespace CodeGenerator
         {
             var data = string.Concat(lines);
 
+            // Dirty hack!
+            data = data.Replace("float*b", "float *b");
+
             if (data.Last() != ';')
             {
                 throw new Exception("Something went wrong!");
@@ -31,7 +34,7 @@ namespace CodeGenerator
             var arguments = rawArguments.Select(raw =>
             {
                 var split = raw.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-                string type = string.Join(' ', split.Take(split.Length - 1));
+                string type = string.Join(' ', split.Take(split.Length - 1).Where(value => value != "OPENBLAS_CONST"));
                 string name = split.Last();
                 if (name.StartsWith("*"))
                 {
@@ -68,7 +71,7 @@ namespace CodeGenerator
         {
             get
             {
-                return true;
+                return arguments.All(arg => arg.Name != "...");
             }
         }
 
@@ -112,6 +115,7 @@ namespace CodeGenerator
 
         public string Name => name;
         public IReadOnlyList<Argument> Arguments => arguments;
+        public string ReturnType => returnType;
 
 
 

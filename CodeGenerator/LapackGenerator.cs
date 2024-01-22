@@ -42,6 +42,7 @@ namespace CodeGenerator
             var dstFile = Path.Combine(dstDir, csFuncName + ".cs");
             using (var writer = new StreamWriter(dstFile, false, Encoding.UTF8))
             {
+                writer.WriteLine("using System;");
                 writer.WriteLine("using System.Numerics;");
                 writer.WriteLine("using System.Runtime.InteropServices;");
                 writer.WriteLine();
