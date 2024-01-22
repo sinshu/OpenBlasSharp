@@ -6,5 +6,7 @@ namespace OpenBlasSharp
 {
     public enum Diag : int
     {
+        NonUnit = 131,
+        Unit = 132,
     }
 }

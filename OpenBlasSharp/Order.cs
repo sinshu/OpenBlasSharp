@@ -6,5 +6,7 @@ namespace OpenBlasSharp
 {
     public enum Order : int
     {
+        RowMajor = 101,
+        ColMajor = 102,
     }
 }

@@ -6,5 +6,7 @@ namespace OpenBlasSharp
 {
     public enum Uplo : int
     {
+        Upper = 121,
+        Lower = 122,
     }
 }
