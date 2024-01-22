@@ -4,6 +4,15 @@ The purpose of this project is to provide a .NET wrapper for [OpenBLAS](https://
 
 
 
+## Features
+
+* Thin wrapper using raw pointers.
+* Most functions and arguments are annotated with doc comments. This is very helpful when working with the BLAS and LAPACK functions, as they often require a large number of arguments.
+
+![An example screenshot shows the doc comment of a BLAS function.](screenshot.png)
+
+
+
 ## Installation
 
 [The NuGet package](https://www.nuget.org/packages/OpenBlasSharp) is available.
