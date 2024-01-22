@@ -36,7 +36,7 @@ namespace OpenBlasSharpTest
                     MatrixLayout.ColMajor,
                     'A', 'A',
                     m, n,
-                    pa, Math.Max(1, m),
+                    pa, m,
                     ps,
                     pu, m,
                     pvt, n,
