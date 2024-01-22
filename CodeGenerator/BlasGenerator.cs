@@ -28,6 +28,8 @@ namespace CodeGenerator
             var dstFile = Path.Combine(dstDir, csFuncName + ".cs");
             using (var writer = new StreamWriter(dstFile, false, Encoding.UTF8))
             {
+                writer.WriteLine("#pragma warning disable CS1591");
+                writer.WriteLine();
                 writer.WriteLine("using System;");
                 writer.WriteLine("using System.Numerics;");
                 writer.WriteLine("using System.Runtime.InteropServices;");

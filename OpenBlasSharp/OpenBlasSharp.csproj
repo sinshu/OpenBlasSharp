@@ -8,6 +8,7 @@
     <Authors>Nobuaki Tanaka</Authors>
     <Version>0.1.0</Version>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 
 </Project>
