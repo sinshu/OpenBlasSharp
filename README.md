@@ -23,13 +23,12 @@ using OpenBlasSharp;
 ### Dot product
 
 ```cs
-var m = 3;
-var n = 4;
+var length = 3;
 
-var random = new Random(42);
+var rnd = new Random(42);
 
-var x = Enumerable.Range(0, length).Select(i => random.NextDouble()).ToArray();
-var y = Enumerable.Range(0, length).Select(i => random.NextDouble()).ToArray();
+var x = Enumerable.Range(0, length).Select(i => rnd.NextDouble()).ToArray();
+var y = Enumerable.Range(0, length).Select(i => rnd.NextDouble()).ToArray();
 
 fixed (double* px = x)
 fixed (double* py = y)
@@ -45,10 +44,10 @@ var m = 3;
 var n = 5;
 var k = 4;
 
-var random = new Random(42);
+var rnd = new Random(42);
 
-var a = Enumerable.Range(0, m * k).Select(i => random.NextDouble()).ToArray();
-var b = Enumerable.Range(0, k * n).Select(i => random.NextDouble()).ToArray();
+var a = Enumerable.Range(0, m * k).Select(i => rnd.NextDouble()).ToArray();
+var b = Enumerable.Range(0, k * n).Select(i => rnd.NextDouble()).ToArray();
 var c = new double[m * n];
 
 fixed (double* pa = a)
@@ -74,9 +73,9 @@ fixed (double* pc = c)
 var m = 4;
 var n = 3;
 
-var random = new Random(42);
+var rnd = new Random(42);
 
-var a = Enumerable.Range(0, m * n).Select(i => random.NextDouble()).ToArray();
+var a = Enumerable.Range(0, m * n).Select(i => rnd.NextDouble()).ToArray();
 var s = new double[Math.Min(m, n)];
 var u = new double[m * m];
 var vt = new double[n * n];
