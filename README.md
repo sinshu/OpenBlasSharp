@@ -17,12 +17,13 @@ This is very helpful when working with the BLAS and LAPACK functions, which ofte
 ## Installation
 
 [The NuGet package](https://www.nuget.org/packages/OpenBlasSharp) is available.
-This package does not include the native DLL.
-You must [download the compiled binary](https://github.com/OpenMathLib/OpenBLAS/releases) and put `libopenblas.dll` at the directory of the executable file.
 
 ```ps1
 Install-Package OpenBlasSharp
 ```
+
+This package does not include the native DLL.
+You must [download the compiled binary](https://github.com/OpenMathLib/OpenBLAS/releases) and put `libopenblas.dll` at the directory of the executable file.
 
 All the classes are in the `OpenBlasSharp` namespace.
 
