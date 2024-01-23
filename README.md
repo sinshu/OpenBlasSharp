@@ -20,6 +20,10 @@ This is very helpful when working with the BLAS and LAPACK functions, which ofte
 This package does not include the native DLL.
 You must [download the compiled binary](https://github.com/OpenMathLib/OpenBLAS/releases) and put `libopenblas.dll` at the directory of the executable file.
 
+```ps1
+Install-Package OpenBlasSharp
+```
+
 All the classes are in the `OpenBlasSharp` namespace.
 
 ```cs
