@@ -1,3 +1,7 @@
+# v0.3.1
+
+* Fixed issue where some BLAS doc comments were missing.
+
 # v0.3.0
 
 * Fixed issue of verbose doc comments in BLAS.

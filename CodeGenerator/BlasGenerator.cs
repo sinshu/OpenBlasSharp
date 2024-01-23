@@ -68,7 +68,7 @@ namespace CodeGenerator
                 foreach (var arg in function.Arguments)
                 {
                     writer.WriteLine("        /// <param name=\"" + ToCamelCase(arg.Name) + "\">");
-                    var doc = description.GetParam(arg.Name);
+                    var doc = GetParam(function, description, arg);
                     if (doc != null)
                     {
                         var first = WebUtility.HtmlEncode(doc.Description[0]);
@@ -109,6 +109,23 @@ namespace CodeGenerator
                 writer.WriteLine("    }");
                 writer.WriteLine("}");
             }
+        }
+
+        private static FunctionDescription.Param? GetParam(BlasFunction function, FunctionDescription description, BlasFunction.Argument arg)
+        {
+            var doc = description.GetParam(arg.Name);
+            if (doc != null)
+            {
+                return doc;
+            }
+
+            doc = description.GetParam(function.Name.Substring(6, 1) + arg.Name);
+            if (doc != null)
+            {
+                return doc;
+            }
+
+            return description.GetParam(function.Name.Substring(7, 1) + arg.Name);
         }
 
         private static string ToPascalCase(string value)
