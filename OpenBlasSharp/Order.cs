@@ -1,12 +1,20 @@
-﻿#pragma warning disable CS1591
-
-using System;
+﻿using System;
 
 namespace OpenBlasSharp
 {
+    /// <summary>
+    /// Specifies the matrix layout.
+    /// </summary>
     public enum Order : int
     {
+        /// <summary>
+        /// Matrices are interpreted as row-major.
+        /// </summary>
         RowMajor = 101,
+
+        /// <summary>
+        /// Matrices are interpreted as column-major.
+        /// </summary>
         ColMajor = 102,
     }
 }

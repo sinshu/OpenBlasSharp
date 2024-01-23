@@ -42,8 +42,6 @@ namespace CodeGenerator
             var dstFile = Path.Combine(dstDir, csFuncName + ".cs");
             using (var writer = new StreamWriter(dstFile, false, Encoding.UTF8))
             {
-                writer.WriteLine("#pragma warning disable CS1591");
-                writer.WriteLine();
                 writer.WriteLine("using System;");
                 writer.WriteLine("using System.Numerics;");
                 writer.WriteLine("using System.Runtime.InteropServices;");
@@ -53,22 +51,22 @@ namespace CodeGenerator
                 writer.WriteLine("    public static partial class Blas");
                 writer.WriteLine("    {");
 
+                writer.WriteLine("        /// <summary>");
+                if (description.Purpose.Count > 0)
+                {
+                    foreach (var line in description.Purpose)
+                    {
+                        writer.WriteLine("        /// " + WebUtility.HtmlEncode(line));
+                    }
+                }
+                else
+                {
+                    writer.WriteLine("        /// No description available.");
+                }
+                writer.WriteLine("        /// </summary>");
+
                 foreach (var arg in function.Arguments)
                 {
-                    writer.WriteLine("        /// <summary>");
-                    if (description.Purpose.Count > 0)
-                    {
-                        foreach (var line in description.Purpose)
-                        {
-                            writer.WriteLine("        /// " + WebUtility.HtmlEncode(line));
-                        }
-                    }
-                    else
-                    {
-                        writer.WriteLine("        /// No description available.");
-                    }
-                    writer.WriteLine("        /// </summary>");
-
                     writer.WriteLine("        /// <param name=\"" + ToCamelCase(arg.Name) + "\">");
                     var doc = description.GetParam(arg.Name);
                     if (doc != null)
@@ -82,6 +80,17 @@ namespace CodeGenerator
                         foreach (var line in doc.Description.Skip(1))
                         {
                             writer.WriteLine("        /// " + WebUtility.HtmlEncode(line));
+                        }
+                    }
+                    else
+                    {
+                        if (arg.Name == "order")
+                        {
+                            writer.WriteLine("        /// Specifies the matrix layout.");
+                        }
+                        else
+                        {
+                            writer.WriteLine("        /// No description available.");
                         }
                     }
                     writer.WriteLine("        /// </param>");
