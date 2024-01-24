@@ -48,6 +48,7 @@ var y = Enumerable.Range(0, len).Select(i => rnd.NextDouble()).ToArray();
 fixed (double* px = x)
 fixed (double* py = y)
 {
+    // Calculate x^T * y.
     var result = Blas.Ddot(len, px, 1, py, 1);
 }
 ```
@@ -69,6 +70,7 @@ fixed (double* pa = a)
 fixed (double* pb = b)
 fixed (double* pc = c)
 {
+    // Calculate c = a * b.
     Blas.Dgemm(
         Order.ColMajor,
         Transpose.NoTrans,
@@ -79,6 +81,33 @@ fixed (double* pc = c)
         pb, k,
         1.0,
         pc, m);
+}
+```
+
+### Inverse matrix using LU decomposition
+
+```cs
+var n = 3;
+
+var random = new Random(42);
+
+var a = Enumerable.Range(0, n * n).Select(i => random.NextDouble()).ToArray();
+var piv = new int[n];
+
+fixed (double* pa = a)
+fixed (int* ppiv = piv)
+{
+    Lapack.Dgetrf(
+        MatrixLayout.ColMajor,
+        n, n,
+        pa, n,
+        ppiv);
+
+    Lapack.Dgetri(
+        MatrixLayout.ColMajor,
+        n,
+        pa, n, // pa will be the inverse matrix.
+        ppiv);
 }
 ```
 
@@ -106,7 +135,7 @@ fixed (double* pwork = work)
         MatrixLayout.ColMajor,
         'A', 'A',
         m, n,
-        pa, m,
+        pa, m, // Note that pa will be destroyed.
         ps,
         pu, m,
         pvt, n,
