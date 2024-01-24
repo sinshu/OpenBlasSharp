@@ -54,9 +54,8 @@ namespace OpenBlasSharpTest
             {
                 for (var row = 0; row < m; row++)
                 {
-                    var error = ma[row, col] - reconstructed[row, col];
-                    Assert.That(Math.Abs(error.Real) < 1.0E-6);
-                    Assert.That(Math.Abs(error.Imaginary) < 1.0E-6);
+                    Assert.That(reconstructed[row, col].Real, Is.EqualTo(ma[row, col].Real).Within(1.0E-6));
+                    Assert.That(reconstructed[row, col].Imaginary, Is.EqualTo(ma[row, col].Imaginary).Within(1.0E-6));
                 }
             }
         }
