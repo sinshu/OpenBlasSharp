@@ -5,28 +5,52 @@ VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeGenerator", "CodeGenerator\CodeGenerator.csproj", "{E3F7D2E6-D6E7-42BD-A041-79E8A1D4763B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBlasSharp", "OpenBlasSharp\OpenBlasSharp.csproj", "{E6E5D19F-7026-46DB-ACE9-B29992ACDA4C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenBlasSharp", "OpenBlasSharp\OpenBlasSharp.csproj", "{E6E5D19F-7026-46DB-ACE9-B29992ACDA4C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenBlasSharpTest", "OpenBlasSharpTest\OpenBlasSharpTest.csproj", "{56D9952F-FD40-479D-83FD-D9DEFF2E22D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenBlasSharpTest", "OpenBlasSharpTest\OpenBlasSharpTest.csproj", "{56D9952F-FD40-479D-83FD-D9DEFF2E22D4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenBlasSharp.Windows", "OpenBlasSharp.Windows\OpenBlasSharp.Windows.csproj", "{3369C40D-E876-438F-8ABC-08B02586F4D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{E3F7D2E6-D6E7-42BD-A041-79E8A1D4763B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E3F7D2E6-D6E7-42BD-A041-79E8A1D4763B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3F7D2E6-D6E7-42BD-A041-79E8A1D4763B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E3F7D2E6-D6E7-42BD-A041-79E8A1D4763B}.Debug|x86.Build.0 = Debug|Any CPU
 		{E3F7D2E6-D6E7-42BD-A041-79E8A1D4763B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E3F7D2E6-D6E7-42BD-A041-79E8A1D4763B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3F7D2E6-D6E7-42BD-A041-79E8A1D4763B}.Release|x86.ActiveCfg = Release|Any CPU
+		{E3F7D2E6-D6E7-42BD-A041-79E8A1D4763B}.Release|x86.Build.0 = Release|Any CPU
 		{E6E5D19F-7026-46DB-ACE9-B29992ACDA4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E6E5D19F-7026-46DB-ACE9-B29992ACDA4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6E5D19F-7026-46DB-ACE9-B29992ACDA4C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E6E5D19F-7026-46DB-ACE9-B29992ACDA4C}.Debug|x86.Build.0 = Debug|Any CPU
 		{E6E5D19F-7026-46DB-ACE9-B29992ACDA4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E6E5D19F-7026-46DB-ACE9-B29992ACDA4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6E5D19F-7026-46DB-ACE9-B29992ACDA4C}.Release|x86.ActiveCfg = Release|Any CPU
+		{E6E5D19F-7026-46DB-ACE9-B29992ACDA4C}.Release|x86.Build.0 = Release|Any CPU
 		{56D9952F-FD40-479D-83FD-D9DEFF2E22D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{56D9952F-FD40-479D-83FD-D9DEFF2E22D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56D9952F-FD40-479D-83FD-D9DEFF2E22D4}.Debug|x86.ActiveCfg = Debug|x86
+		{56D9952F-FD40-479D-83FD-D9DEFF2E22D4}.Debug|x86.Build.0 = Debug|x86
 		{56D9952F-FD40-479D-83FD-D9DEFF2E22D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56D9952F-FD40-479D-83FD-D9DEFF2E22D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56D9952F-FD40-479D-83FD-D9DEFF2E22D4}.Release|x86.ActiveCfg = Release|x86
+		{56D9952F-FD40-479D-83FD-D9DEFF2E22D4}.Release|x86.Build.0 = Release|x86
+		{3369C40D-E876-438F-8ABC-08B02586F4D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3369C40D-E876-438F-8ABC-08B02586F4D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3369C40D-E876-438F-8ABC-08B02586F4D3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3369C40D-E876-438F-8ABC-08B02586F4D3}.Debug|x86.Build.0 = Debug|Any CPU
+		{3369C40D-E876-438F-8ABC-08B02586F4D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3369C40D-E876-438F-8ABC-08B02586F4D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3369C40D-E876-438F-8ABC-08B02586F4D3}.Release|x86.ActiveCfg = Release|Any CPU
+		{3369C40D-E876-438F-8ABC-08B02586F4D3}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
