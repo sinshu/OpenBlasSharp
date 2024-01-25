@@ -6,7 +6,8 @@ The purpose of this project is to provide a .NET wrapper for [OpenBLAS](https://
 
 ## Features
 
-* Thin wrapper using raw pointers.
+* Auto-generated thin wrapper with no special marshalling.
+* Covers BLAS, LAPACK, and OpenBLAS-specific functions.
 * Most functions and arguments are annotated with doc comments taken from the original FORTRAN code.
 This is very helpful when working with the BLAS and LAPACK functions, which often require a large number of arguments.
 
@@ -150,7 +151,7 @@ fixed (double* pwork = work)
 }
 ```
 
-### OpenBLAS specific functions
+### OpenBLAS-specific functions
 
 ```cs
 var numThreads = OpenBlas.GetNumThreads();
@@ -160,7 +161,7 @@ var numThreads = OpenBlas.GetNumThreads();
 
 ## Development status
 
-* Low-level LAPACK functions with the `_work` suffix are not supported.
+* Low-level LAPACK functions with the `work` suffix are not supported.
 * LAPACK functions that require function pointers are not supported.
 
 
