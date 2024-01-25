@@ -23,7 +23,8 @@ Install-Package OpenBlasSharp
 ```
 
 This package does not include the native DLL.
-You must [download the compiled binary](https://github.com/OpenMathLib/OpenBLAS/releases) and put `libopenblas.dll` at the directory of the executable file.
+You must [download the compiled binary](https://github.com/OpenMathLib/OpenBLAS/releases) and put `libopenblas.dll` in the same directory as the executable file.
+Binaries for both x86 and x64 architectures are supported, but [the ILP64 build with the `x64-64` suffix](https://github.com/OpenMathLib/OpenBLAS/blob/develop/docs/distributing.md#ilp64-interface-builds) is not supported.
 
 All the classes are in the `OpenBlasSharp` namespace.
 
