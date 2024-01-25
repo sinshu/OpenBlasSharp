@@ -7,51 +7,54 @@ using OpenBlasSharp;
 
 namespace OpenBlasSharpTest
 {
-    public class QrDouble
+    public class QrComplex
     {
-        [TestCase(1)]
-        [TestCase(2)]
-        [TestCase(3)]
-        [TestCase(4)]
-        [TestCase(5)]
-        public unsafe void Reconstruction(int n)
+        [TestCase(1, 1)]
+        [TestCase(2, 2)]
+        [TestCase(3, 3)]
+        [TestCase(4, 4)]
+        [TestCase(5, 5)]
+        [TestCase(3, 2)]
+        [TestCase(5, 3)]
+        public unsafe void Reconstruction(int m, int n)
         {
             var random = new Random(42);
 
-            var a = Enumerable.Range(0, n * n).Select(i => random.NextDouble()).ToArray();
+            var a = Enumerable.Range(0, m * n).Select(i => random.NextDouble()).ToArray();
             var tau = new double[n];
 
-            var ma = CreateMatrix(a, n);
+            var ma = CreateMatrix(a, m, n);
 
-            Matrix<double> mr;
-
+            double[] result;
             fixed (double* pa = a)
             fixed (double* ptau = tau)
             {
                 Lapack.Dgeqrf(
                     MatrixLayout.ColMajor,
-                    n, n,
-                    pa, n,
+                    m, n,
+                    pa, m,
                     ptau);
 
-                mr = CreateMatrix(a, n);
+                result = a.ToArray();
 
                 Lapack.Dorgqr(
                     MatrixLayout.ColMajor,
-                    n, n, n,
-                    pa, n,
+                    m, n, n,
+                    pa, m,
                     ptau);
             }
 
+            Matrix<double> mr = new DenseMatrix(n, n);
             for (var col = 0; col < n; col++)
             {
-                for (var row = col + 1; row < n; row++)
+                for (var row = 0; row <= col; row++)
                 {
-                    mr[row, col] = 0;
+                    var i = m * col + row;
+                    mr[row, col] = result[i];
                 }
             }
 
-            var mq = CreateMatrix(a, n);
+            var mq = CreateMatrix(a, m, n);
             var reconstructed = mq * mr;
 
             for (var col = 0; col < n; col++)
@@ -63,13 +66,13 @@ namespace OpenBlasSharpTest
             }
         }
 
-        private static Matrix<double> CreateMatrix(double[] values, int n)
+        private static Matrix<double> CreateMatrix(double[] values, int m, int n)
         {
-            var mat = new DenseMatrix(n, n);
+            var mat = new DenseMatrix(m, n);
             var i = 0;
             for (var col = 0; col < n; col++)
             {
-                for (var row = 0; row < n; row++)
+                for (var row = 0; row < m; row++)
                 {
                     mat[row, col] = values[i++];
                 }
