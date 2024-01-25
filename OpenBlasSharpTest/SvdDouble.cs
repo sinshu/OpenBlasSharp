@@ -16,8 +16,10 @@ namespace OpenBlasSharpTest
         [TestCase(5, 5)]
         [TestCase(3, 2)]
         [TestCase(5, 3)]
+        [TestCase(4, 1)]
         [TestCase(2, 3)]
         [TestCase(3, 5)]
+        [TestCase(1, 4)]
         public unsafe void Reconstruction(int m, int n)
         {
             var random = new Random(42);

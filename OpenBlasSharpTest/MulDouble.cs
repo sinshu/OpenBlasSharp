@@ -13,9 +13,13 @@ namespace OpenBlasSharpTest
         [TestCase(2, 2, 2)]
         [TestCase(3, 3, 3)]
         [TestCase(2, 3, 4)]
-        [TestCase(3, 2, 4)]
-        [TestCase(5, 3, 4)]
-        [TestCase(3, 5, 4)]
+        [TestCase(1, 3, 5)]
+        [TestCase(4, 3, 2)]
+        [TestCase(5, 3, 1)]
+        [TestCase(2, 5, 2)]
+        [TestCase(1, 4, 1)]
+        [TestCase(5, 2, 5)]
+        [TestCase(4, 1, 4)]
         public unsafe void Test(int m, int n, int k)
         {
             var random = new Random(42);
