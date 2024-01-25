@@ -1,3 +1,7 @@
+# v0.3.2
+
+* Improved readability of doc comments by using the `<para>` tag.
+
 # v0.3.1
 
 * Fixed issue where some BLAS doc comments were missing.
