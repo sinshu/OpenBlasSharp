@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace CodeGenerator
@@ -158,9 +159,9 @@ namespace CodeGenerator
                 }
             }
 
-            this.purpose = purpose.ToArray();
+            this.purpose = ToArray(purpose);
             this.paramList = paramList.ToArray();
-            this.remarks = remarks.ToArray();
+            this.remarks = ToArray(remarks);
         }
 
         private FunctionDescription()
@@ -183,6 +184,44 @@ namespace CodeGenerator
             }
 
             return null;
+        }
+
+        private string[] ToArray(List<string> lines)
+        {
+            if (lines.Count == 0)
+            {
+                return Array.Empty<string>();
+            }
+
+            var result = new List<string>();
+            var prev = "";
+            foreach (var line in lines)
+            {
+                var trimmed = line.Trim();
+
+                if (prev == "" && trimmed == "")
+                {
+                    continue;
+                }
+
+                if (trimmed == "")
+                {
+                    result.Add("");
+                }
+                else
+                {
+                    result.Add(line);
+                }
+
+                prev = trimmed;
+            }
+
+            while (result.Last() == "")
+            {
+                result.RemoveAt(result.Count - 1);
+            }
+
+            return result.ToArray();
         }
 
         public IReadOnlyList<string> Purpose => purpose;

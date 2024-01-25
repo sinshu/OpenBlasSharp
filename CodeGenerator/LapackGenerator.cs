@@ -54,10 +54,20 @@ namespace CodeGenerator
                 writer.WriteLine("        /// <summary>");
                 if (description.Purpose.Count > 0)
                 {
+                    writer.WriteLine("        /// <para>");
                     foreach (var line in description.Purpose)
                     {
-                        writer.WriteLine("        /// " + WebUtility.HtmlEncode(line));
+                        if (line == "")
+                        {
+                            writer.WriteLine("        /// </para>");
+                            writer.WriteLine("        /// <para>");
+                        }
+                        else
+                        {
+                            writer.WriteLine("        /// " + WebUtility.HtmlEncode(line));
+                        }
                     }
+                    writer.WriteLine("        /// </para>");
                 }
                 else
                 {
@@ -110,10 +120,20 @@ namespace CodeGenerator
                 if (description.Remarks.Count > 0)
                 {
                     writer.WriteLine("        /// <remarks>");
+                    writer.WriteLine("        /// <para>");
                     foreach (var line in description.Remarks)
                     {
-                        writer.WriteLine("        /// " + WebUtility.HtmlEncode(line));
+                        if (line == "")
+                        {
+                            writer.WriteLine("        /// </para>");
+                            writer.WriteLine("        /// <para>");
+                        }
+                        else
+                        {
+                            writer.WriteLine("        /// " + WebUtility.HtmlEncode(line));
+                        }
                     }
+                    writer.WriteLine("        /// </para>");
                     writer.WriteLine("        /// </remarks>");
                 }
 
