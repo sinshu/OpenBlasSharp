@@ -41,15 +41,16 @@ using OpenBlasSharp;
 
 
 
-## Examples
+## BLAS Examples
 
-### Dot product
+BLAS functions are provided as static methods of the `Blas` class.
+
+### Dot Product
 
 ```cs
 var len = 3;
 
 var rnd = new Random(42);
-
 var x = Enumerable.Range(0, len).Select(i => rnd.NextDouble()).ToArray();
 var y = Enumerable.Range(0, len).Select(i => rnd.NextDouble()).ToArray();
 
@@ -61,7 +62,7 @@ fixed (double* py = y)
 }
 ```
 
-### Matrix multiplication
+### Matrix Multiplication
 
 ```cs
 var m = 3;
@@ -69,7 +70,6 @@ var n = 5;
 var k = 4;
 
 var rnd = new Random(42);
-
 var a = Enumerable.Range(0, m * k).Select(i => rnd.NextDouble()).ToArray();
 var b = Enumerable.Range(0, k * n).Select(i => rnd.NextDouble()).ToArray();
 var c = new double[m * n];
@@ -92,13 +92,18 @@ fixed (double* pc = c)
 }
 ```
 
-### Inverse matrix using LU decomposition
+
+
+## LAPACK Examples
+
+LAPACK functions are provided as static methods of the `Lapack` class.
+
+### Inverse Matrix using LU Decomposition
 
 ```cs
 var n = 3;
 
 var random = new Random(42);
-
 var a = Enumerable.Range(0, n * n).Select(i => random.NextDouble()).ToArray();
 var piv = new int[n];
 
@@ -119,14 +124,13 @@ fixed (int* ppiv = piv)
 }
 ```
 
-### Singular value decomposition
+### Singular Value Decomposition
 
 ```cs
 var m = 4;
 var n = 3;
 
 var rnd = new Random(42);
-
 var a = Enumerable.Range(0, m * n).Select(i => rnd.NextDouble()).ToArray();
 var s = new double[Math.Min(m, n)];
 var u = new double[m * m];
@@ -151,18 +155,25 @@ fixed (double* pwork = work)
 }
 ```
 
-### OpenBLAS-specific functions
+
+
+## OpenBLAS-specific functions
+
+OpenBLAS-specific functions are provided as static methods of the `OpenBlas` class.
 
 ```cs
 var numThreads = OpenBlas.GetNumThreads();
+var numProcs = OpenBlas.GetNumProcs();
+var config = OpenBlas.GetConfig();
 ```
 
 
 
-## Development status
+## Limitations
 
-* Low-level LAPACK functions with the `work` suffix are not supported.
-* LAPACK functions that require function pointers are not supported.
+* There are no plans to support low-level LAPACK functions with the `work` suffix.
+* LAPACK functions that require function pointers are currently not supported, but support is planned for the future.
+* The doc comments in the original FORTRAN code do not completely align with the C API of OpenBLAS, so the annotations for some APIs are incomplete.
 
 
 
