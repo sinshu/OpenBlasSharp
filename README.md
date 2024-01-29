@@ -6,7 +6,7 @@ The purpose of this project is to provide a .NET wrapper for [OpenBLAS](https://
 
 ## Features
 
-* Auto-generated thin wrapper in C# with no special marshalling.
+* Auto-generated thin wrapper for C# with no special marshalling.
 * Covers BLAS, LAPACK, and OpenBLAS-specific functions.
 * Most functions and arguments are annotated with doc comments taken from the original FORTRAN code.
 This is very helpful when working with the BLAS and LAPACK functions, which often require a large number of arguments.
