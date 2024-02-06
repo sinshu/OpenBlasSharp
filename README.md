@@ -13,6 +13,8 @@ This is very helpful when working with the BLAS and LAPACK functions, which ofte
 
 ![An example screenshot shows the doc comment of a BLAS function.](screenshot.png)
 
+If you are looking for a high-level wrapper for OpenBLAS, check out [NumFlat](https://github.com/sinshu/numflat).
+
 
 
 ## Installation
