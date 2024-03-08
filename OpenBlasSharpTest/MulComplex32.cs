@@ -31,7 +31,7 @@ namespace OpenBlasSharpTest
             var c = new MComplex32[m * n];
 
             var alpha = MComplex32.One;
-            var beta = MComplex32.One;
+            var beta = MComplex32.Zero;
 
             var ma = CreateMatrix(a, m, k);
             var mb = CreateMatrix(b, k, n);

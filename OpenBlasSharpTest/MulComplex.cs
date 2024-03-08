@@ -30,7 +30,7 @@ namespace OpenBlasSharpTest
             var c = new Complex[m * n];
 
             var alpha = Complex.One;
-            var beta = Complex.One;
+            var beta = Complex.Zero;
 
             var ma = CreateMatrix(a, m, k);
             var mb = CreateMatrix(b, k, n);

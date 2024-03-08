@@ -89,7 +89,7 @@ fixed (double* pc = c)
         1.0,
         pa, m,
         pb, k,
-        1.0,
+        0.0,
         pc, m);
 }
 ```

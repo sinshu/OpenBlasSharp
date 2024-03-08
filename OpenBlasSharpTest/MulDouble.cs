@@ -44,7 +44,7 @@ namespace OpenBlasSharpTest
                     1.0,
                     pa, m,
                     pb, k,
-                    1.0,
+                    0.0,
                     pc, m);
             }
             var actual = CreateMatrix(c, m, n);
