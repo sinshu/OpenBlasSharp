@@ -1,3 +1,7 @@
+# v0.3.3
+
+* Regenerated the wrapper from the newest OpenBLAS 0.3.27.
+
 # v0.3.2
 
 * Improved readability of doc comments by using the `<para>` tag.
