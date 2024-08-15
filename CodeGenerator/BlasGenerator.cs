@@ -17,6 +17,9 @@ namespace CodeGenerator
 
             var functions = BlasFunction.FromHeaderFile(cblasHeaderFile);
 
+            // Ignore some functions here...
+            functions = functions.Where(fun => !fun.Name.Contains("batch")).ToArray();
+
             foreach (var function in functions)
             {
                 var srcPath = Path.Combine(blasNetlibSrcDirectory, function.Name.Substring(6) + ".f");
