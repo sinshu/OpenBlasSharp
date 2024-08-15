@@ -13,4 +13,4 @@ lapack
 blas
 
 # Native binaries
-runtimes
+*.dll
