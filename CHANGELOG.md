@@ -1,3 +1,7 @@
+# v0.3.4
+
+* Regenerated the wrapper from the newest OpenBLAS 0.3.28.
+
 # v0.3.3
 
 * Regenerated the wrapper from the newest OpenBLAS 0.3.27.
