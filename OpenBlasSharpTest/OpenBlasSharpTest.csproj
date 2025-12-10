@@ -23,7 +23,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="OpenBlasSharp.Windows" Version="2025.1.13" />
+    <PackageReference Include="OpenBlasSharp.Windows" Version="2025.12.10" />
   </ItemGroup>
 
   <ItemGroup>
