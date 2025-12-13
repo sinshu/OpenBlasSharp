@@ -7,6 +7,23 @@ namespace OpenBlasSharpTest
     public class OpenBlasFunctions
     {
         [Test]
+        public unsafe void ShowPlatform()
+        {
+            switch (sizeof(IntPtr))
+            {
+                case 4:
+                    Console.WriteLine("x86");
+                    break;
+                case 8:
+                    Console.WriteLine("x64");
+                    break;
+                default:
+                    Console.WriteLine("???");
+                    break;
+            }
+        }
+
+        [Test]
         public void SetNumThreads()
         {
             OpenBlas.SetNumThreads(1);
