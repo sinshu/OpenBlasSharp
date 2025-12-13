@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="CodeGenerator/CodeGenerator.csproj" />
+  <Project Path="OpenBlasSharp.Windows/OpenBlasSharp.Windows.csproj" />
+  <Project Path="OpenBlasSharp/OpenBlasSharp.csproj" />
+  <Project Path="OpenBlasSharpTest/OpenBlasSharpTest.csproj" />
+</Solution>
