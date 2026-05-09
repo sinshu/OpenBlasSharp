@@ -3,6 +3,20 @@
 The purpose of this project is to provide a .NET wrapper for [OpenBLAS](https://github.com/OpenMathLib/OpenBLAS).
 
 
+## Announcement
+
+In recent years, better alternatives have become available,
+so I have decided that OpenBlasSharp will no longer be actively updated going forward.
+Possible alternatives to OpenBlasSharp include:
+
+* [BlasSharp](https://github.com/nuskey8/BlasSharp)  
+This library uses a more reliable binding generator and also provides binaries for platforms other than Windows.
+
+* [ILNumerics.ONAL](https://github.com/ILNumerics/ILNumerics.ONAL)  
+The core of the long-established ILNumerics library has been made open source.
+This package includes a managed LAPACK implementation, so it does not require native binaries.
+
+
 
 ## Features
 
